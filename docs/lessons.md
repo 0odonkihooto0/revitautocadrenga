@@ -3,6 +3,28 @@
 > Append-only журнал: наступили на грабли → записали, чтобы не повторить.
 > Формат: «Симптом → Причина → Правило». Новые записи — сверху.
 
+## 2026-07-18 — pyRevit молча пропускает расширение с default_enabled=False
+
+- **Симптом.** Routes Server отвечает, но маршруты расширения не зарегистрированы:
+  `RouteHandlerNotDefinedException` на `/revit_mcp/status/`; ошибок при старте не видно.
+- **Причина.** В extension.json у revit-mcp-server стоит `"default_enabled": "False"` —
+  pyRevit не грузит такое расширение, пока в pyRevit_config.ini нет явного
+  `[<имя>.extension] disabled = false`.
+- **Правило.** После копирования стороннего расширения включать его явно:
+  `pyrevit configs "<имя>.extension:disabled" disable` — и перезапускать Revit.
+
+## 2026-07-18 — Локальный прокси Autodesk перехватывает запросы к localhost
+
+- **Симптом.** pyRevit Routes Server слушает порт 48884 (видно в netstat), но
+  `curl`/`Invoke-WebRequest` к `http://localhost:48884/...` возвращают 503
+  «Forwarding failure» от Privoxy.
+- **Причина.** Autodesk Genuine Service поднимает локальный прокси Privoxy
+  (127.0.0.1:8118) и прописывает его в системные настройки; HTTP-клиенты по
+  умолчанию гонят через него даже запросы к localhost.
+- **Правило.** Все обращения к локальным API САПР — в обход прокси:
+  `curl --noproxy '*' ...`; в Python — `proxies={"http": None}` или
+  `NO_PROXY=localhost`. Проверять маршрут запроса до того, как винить сервер.
+
 ## 2026-07 — Наивный RAG на строительных нормах не работает
 
 - **Симптом.** Фронтир-LLM «из коробки» массово выдумывают номера пунктов СП

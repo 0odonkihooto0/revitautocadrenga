@@ -13,5 +13,6 @@
 - Итог эксперимента — 2–3 вывода и следующий шаг; заметное открытие → docs/lessons.md
   или docs/decisions.md, продвижение → docs/status.md.
 
-Пока экспериментов нет. Первый ожидаемый — `00-revit-mcp.md`
-(см. чек-лист в [docs/03-plan-realizacii.md](../docs/03-plan-realizacii.md)).
+| № | Эксперимент | Статус |
+|---|---|---|
+| [00](00-revit-mcp.md) | Связка Claude ↔ Revit через MCP (revit-mcp-server) | завершён |
