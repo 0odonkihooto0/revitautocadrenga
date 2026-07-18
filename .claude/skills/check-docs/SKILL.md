@@ -1,11 +1,11 @@
 ---
 description: Проверить документацию — целостность внутренних ссылок, согласованность таблиц README/CLAUDE.md со списком docs/, нумерацию файлов. Использовать после правок документов или когда пользователь просит проверить доки.
-allowed-tools: Bash(python3 .claude/skills/check-docs/scripts/check_links.py)
+allowed-tools: Bash(uv run python .claude/skills/check-docs/scripts/check_links.py)
 ---
 
 ## Результаты проверки
 
-!`python3 "${CLAUDE_PROJECT_DIR:-.}"/.claude/skills/check-docs/scripts/check_links.py`
+!`uv run python "${CLAUDE_PROJECT_DIR:-.}"/.claude/skills/check-docs/scripts/check_links.py`
 
 ## Инструкции
 
