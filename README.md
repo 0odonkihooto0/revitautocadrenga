@@ -55,6 +55,9 @@
 | `.claude/rules/` | Модульные правила: нормативка, стиль документов, код (по типам файлов) |
 | `.claude/skills/` | Команды: `/new-experiment`, `/check-docs`, `/status` |
 | [experiments/](experiments/) | Журнал практических экспериментов (этап 0+) |
+| [norms/](norms/) | Полные md-тексты СП ядра ВК (слой 3 базы знаний) |
+| `rules/`, `calc/`, `tests/` | Слой 1 базы знаний: YAML-правила из таблиц СП + расчётный код с тестами |
+| [validation/](validation/) | Контрольные вопросы для проверки базы знаний |
 
 Память между сессиями живёт в git: [docs/status.md](docs/status.md) импортируется в
 CLAUDE.md автоматически, [docs/decisions.md](docs/decisions.md) и

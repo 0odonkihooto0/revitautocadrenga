@@ -1,0 +1,17 @@
+[project]
+name = "vk-norms"
+version = "0.1.0"
+description = "База знаний норм ВК: структурированные правила и расчётный код (этап 1)"
+requires-python = ">=3.11"
+dependencies = [
+    "pyyaml>=6.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
