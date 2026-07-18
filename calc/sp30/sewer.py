@@ -53,6 +53,67 @@ def min_slope_non_calculated(d_mm: float) -> float:
     return 1.0 / d_mm
 
 
+_UNVENTED_TABLES = {
+    "pvh": "tablitsa_k5_pvh",
+    "pp": "tablitsa_k6_pp",
+    "chugun": "tablitsa_k7_chugun",
+}
+
+
+def stack_capacity_unvented(
+    material: str, stack_dn: float, otvod_dn: float, angle: float, work_height_m: float
+) -> float:
+    """Пропускная способность невентилируемого стояка, л/с — СП 30.13330.2020, прил. К (К.5–К.7).
+
+    material: pvh | pp | chugun; work_height_m — рабочая высота стояка, м.
+    Промежуточная высота округляется вверх до табличной (консервативно: большей высоте
+    соответствует меньшая пропускная способность).
+    """
+    if material not in _UNVENTED_TABLES:
+        raise ValueError(f"Материал «{material}»; доступны: {', '.join(_UNVENTED_TABLES)}")
+    table = load_rule("propusknaya_stoyakov_nevent")[_UNVENTED_TABLES[material]]
+    col = f"{stack_dn:g}/{otvod_dn:g}"
+    if col not in table["kolonki"]:
+        raise ValueError(
+            f"Пара стояк/отвод {col} не нормируется для {material}: есть {table['kolonki']}"
+        )
+    ci = table["kolonki"].index(col)
+    heights = sorted({row["vysota_m"] for row in table["stroki"]})
+    if work_height_m > heights[-1]:
+        raise ValueError(
+            f"Рабочая высота {work_height_m} м больше табличной {heights[-1]} м "
+            f"({material}, прил. К) — невентилируемый стояк не нормируется"
+        )
+    height = next(h for h in heights if h >= work_height_m)
+    for row in table["stroki"]:
+        if row["vysota_m"] == height and float(row["ugol_grad"]) == float(angle):
+            return float(row["qs"][ci])
+    raise ValueError(f"Нет строки для высоты {height} м и угла {angle}° ({material}, прил. К)")
+
+
+def stack_capacity_air_valve(material: str, stack_dn: float, otvod_dn: float, angle: float) -> float:
+    """Пропускная способность невентилируемого стояка с воздушным клапаном, л/с — табл. К.8.
+
+    Данные действительны только для клапанов с площадью живого сечения воздушного
+    потока 1650 мм² (стояк 50) и 3170 мм² (стояк 110/100) — примечание к К.8.
+    """
+    table = load_rule("propusknaya_stoyakov_nevent")["tablitsa_k8_vozdushny_klapan"]
+    col = f"{material}-{stack_dn:g}"
+    if col not in table["kolonki"]:
+        raise ValueError(f"Колонка {col} не нормируется в К.8: есть {table['kolonki']}")
+    ci = table["kolonki"].index(col)
+    for row in table["stroki"]:
+        if float(row["otvod_mm"]) == float(otvod_dn) and float(row["ugol_grad"]) == float(angle):
+            value = row["qs"][ci]
+            if value is None:
+                raise ValueError(
+                    f"Комбинация стояк {stack_dn}/отвод {otvod_dn} ({material}) "
+                    f"не нормируется («–» в таблице К.8)"
+                )
+            return float(value)
+    raise ValueError(f"Нет строки для отвода {otvod_dn} мм и угла {angle}° (табл. К.8)")
+
+
 def stack_capacity(material: str, stack_dn: float, otvod_dn: float, angle: float) -> float:
     """Пропускная способность вентилируемого стояка, л/с — СП 30.13330.2020, прил. К.
 

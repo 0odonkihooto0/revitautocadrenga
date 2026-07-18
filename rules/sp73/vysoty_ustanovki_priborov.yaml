@@ -1,0 +1,60 @@
+# Высоты установки санитарных приборов и водоразборной арматуры
+# Слой 1 базы знаний (см. docs/02-arhitektura.md §4)
+rule: fixture_installation_heights
+source: "СП 73.13330.2016, п. 6.3.4 (таблица 3), п. 6.2.1"
+verified: "сверено с PDF ФАУ ФЦС (стр. документа 19–21), 2026-07-18"
+units: "мм от уровня чистого пола"
+tablitsa_3:
+  punkt: "СП 73.13330.2016, п. 6.3.4, таблица 3"
+  kolonki:
+    zhilye: "в жилых, общественных и производственных зданиях"
+    shkoly_lechebnye: "в школах и детских лечебных учреждениях"
+    doshkolnye_invalidy: >
+      в дошкольных учреждениях и помещениях для инвалидов, передвигающихся
+      с помощью различных приспособлений
+  stroki:
+    umyvalnik_do_verha_borta: {zhilye: 800, shkoly_lechebnye: 700, doshkolnye_invalidy: 500}
+    rakovina_moyka_do_verha_borta: {zhilye: 850, shkoly_lechebnye: 850, doshkolnye_invalidy: 500}
+    vanna_do_verha_borta: {zhilye: 600, shkoly_lechebnye: 500, doshkolnye_invalidy: 500}
+    pissuar_nastennyi_lotkovy_do_verha_borta: {zhilye: 650, shkoly_lechebnye: 500, doshkolnye_invalidy: 400}
+    dushevoy_poddon_do_verha_borta: {zhilye: 400, shkoly_lechebnye: 400, doshkolnye_invalidy: 300}
+    pitevoy_fontanchik_podvesnoy_do_verha_borta: {zhilye: 900, shkoly_lechebnye: 750, doshkolnye_invalidy: null}
+  dopuski:
+    otdelno_stoyashchie_mm: 20
+    gruppovaya_ustanovka_mm: 45
+    primechaniye: "примечание 1 к таблице 3: ±20 мм для отдельно стоящих, 45 мм при групповой установке"
+  primechaniya:
+    - "При общем смесителе для умывальника и ванны высота умывальника — 850 мм до верха борта (прим. 3)."
+    - >
+      Лечебные учреждения (прим. 4): мойка инвентарная чугунная (до верха бортов) — 650;
+      мойка для клеёнок — 700; видуар (до верха) — 400; бачок для дезинфицирующего
+      раствора (до низа бачка) — 1230.
+    - >
+      Расстояния между осями умывальников — не менее 650 мм; ручных и ножных ванн,
+      писсуаров — не менее 700 мм (прим. 5).
+    - >
+      В помещениях для инвалидов умывальники, раковины и мойки устанавливать
+      не ближе 200 мм от боковой стены (прим. 6).
+armatura:
+  punkt: "СП 73.13330.2016, п. 6.2.1"
+  ot_bortov_priborov_mm:
+    vodorazborny_kran_smesitel_ot_rakoviny: 250
+    vodorazborny_kran_smesitel_ot_moyki: 200
+    tualetny_kran_smesitel_ot_umyvalnika: 200
+  ot_chistogo_pola_mm:
+    krany_v_banyah: 800
+    smyvnye_krany_unitazov: 800
+    smesiteli_inventarnyh_moek_obshchestv_lechebn: 800
+    smesiteli_vann: 800
+    smesiteli_viduarov_kosoy_vypusk: 800
+    smesiteli_viduarov_pryamoy_vypusk: 1000
+    smesiteli_moek_kleenok_lechebn: 1100
+    smesiteli_obshchie_vann_i_umyvalnikov: 1100
+    loktevye_smesiteli_hirurgicheskih_umyvalnikov: 1100
+    krany_mytya_polov_tualetnyh_obshchestv: 600
+    smesiteli_dusha: 1200
+  dushevye_setki_mm:
+    obychnye_ot_niza_setki: [2100, 2250]
+    kabiny_invalidov: [1700, 1850]
+    detskie_doshkolnye_ot_dnishcha_poddona: 1500
+  dopusk_mm: 20
