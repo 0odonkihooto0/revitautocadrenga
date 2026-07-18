@@ -57,3 +57,23 @@ class TestSearch:
     def test_get_clause_tablitsa(self, index):
         chunks = index.get_clause("sp30", "табл. К.5")
         assert chunks and "невентилируемых" in chunks[0].text.lower()
+
+
+class TestRulesLayer:
+    def test_list_rules(self):
+        from norms_mcp.server import list_rules
+
+        listing = list_rules()
+        assert "sp30/formuly_raskhodov" in listing
+        assert "sp73/vysoty_ustanovki_priborov" in listing
+
+    def test_get_rule(self):
+        from norms_mcp.server import get_rule
+
+        text = get_rule("sp30", "formuly_raskhodov")
+        assert "q = 5 * q0 * alpha" in text
+
+    def test_get_rule_neizvestnoe(self):
+        from norms_mcp.server import get_rule
+
+        assert "нет" in get_rule("sp30", "takogo_net")

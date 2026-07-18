@@ -1,8 +1,11 @@
-"""MCP-сервер поиска по нормативным документам ВК (norms/).
+"""MCP-сервер базы знаний норм ВК: слой 1 (YAML-правила) + слой 3 (поиск по norms/).
 
-Инструменты: search_norms (BM25), get_clause (полный текст пункта), list_norm_docs.
+Инструменты: search_norms (BM25), get_clause (полный текст пункта), list_norm_docs,
+list_rules / get_rule (проверенные машиночитаемые правила из rules/).
 Запуск: `uv run python -m norms_mcp` (stdio), регистрация — .mcp.json в корне репо.
 """
+
+from pathlib import Path
 
 from mcp.server.fastmcp import FastMCP
 
@@ -12,6 +15,7 @@ from norms_mcp.parser import DOC_META
 mcp = FastMCP("norms")
 
 SNIPPET_CHARS = 500
+RULES_DIR = Path(__file__).resolve().parents[1] / "rules"
 
 
 @mcp.tool()
@@ -57,6 +61,37 @@ def get_clause(doc: str, clause: str) -> str:
     title = DOC_META[doc][1]
     body = "\n\n".join(c.text for c in chunks)
     return f"{title} — {clause}\n\n{body}"
+
+
+@mcp.tool()
+def list_rules() -> str:
+    """Перечень машиночитаемых правил слоя 1 — оцифрованные таблицы и формулы СП.
+
+    Значения в них перенесены из PDF со сверкой (в отличие от полнотекстового слоя,
+    где конвертация могла испортить формулы и знаки сравнения). Для вопросов о числах
+    и формулах сначала смотри сюда, потом в полнотекстовый поиск.
+    """
+    lines = []
+    for path in sorted(RULES_DIR.glob("*/*.yaml")):
+        head = path.read_text(encoding="utf-8").splitlines()
+        source = next((ln.split(":", 1)[1].strip().strip('"') for ln in head
+                       if ln.startswith("source:")), "")
+        lines.append(f"{path.parent.name}/{path.stem} — {source}")
+    return "\n".join(lines)
+
+
+@mcp.tool()
+def get_rule(doc: str, name: str) -> str:
+    """Полный YAML правила слоя 1 (точные формулы и значения, сверенные с PDF).
+
+    doc — каталог правила (sp30, sp73), name — имя файла без .yaml,
+    как в выдаче list_rules (например: sp30, formuly_raskhodov).
+    """
+    path = RULES_DIR / doc / f"{name}.yaml"
+    if not path.is_file():
+        known = [f"{p.parent.name}/{p.stem}" for p in sorted(RULES_DIR.glob("*/*.yaml"))]
+        return f"Правила {doc}/{name} нет. Есть: {', '.join(known)}"
+    return path.read_text(encoding="utf-8")
 
 
 @mcp.tool()

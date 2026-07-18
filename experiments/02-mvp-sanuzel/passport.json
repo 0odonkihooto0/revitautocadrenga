@@ -1,0 +1,74 @@
+{
+  "obekt": "Snowdon Towers Sample Plumbing — санузел квартиры, уровень L2 (блок 43)",
+  "sozdano": "2026-07-18, аналитик v0: данные извлечены из АР/MEP-модели через Revit MCP (эксперимент 02)",
+  "koordinaty": "мм, внутренняя система координат модели; Z — абсолютная отметка",
+  "uroven": {"name": "L2", "otmetka_mm": 2464},
+  "stoyak_k1": {
+    "revit_id": 1478851,
+    "x": 12798, "y": 5290,
+    "dia_mm": 102,
+    "z_niz": 1573, "z_verkh": 4046,
+    "sistema": "Building Sanitary",
+    "kommentariy": "существующий стояк модели; наши трассы строятся до его оси"
+  },
+  "tochka_podkl_voda": {
+    "x": 12798, "y": 5290, "z_mag": 5164,
+    "kommentariy": "⚠️ допущение: шахта В1/Т3 рядом со стояком К1, магистраль под потолком (пол + 2700); подтвердить инженеру"
+  },
+  "zadanie_inzhenera": {
+    "U_zhiteley": 4,
+    "q_hr_u_l": 15.6,
+    "kommentariy": "⚠️ принято для демонстрации расчёта вероятности P (формула 3): табл. А.2 не оцифрована, значения подлежат заданию/проверке инженером"
+  },
+  "pribory": [
+    {
+      "revit_id": 1371870,
+      "tip_a1": "unitaz_bachok",
+      "revit_name": "WaterClosetConnection :: Water Closet Connection",
+      "connectors": {
+        "k1": {"x": 9461, "y": 5290, "z": 2380, "dia_mm": 102},
+        "v1": {"x": 9969, "y": 5493, "z": 2667, "dia_mm": 13}
+      }
+    },
+    {
+      "revit_id": 1371837,
+      "tip_a1": "umyvalnik_smesitel",
+      "revit_name": "SinkConnection :: Vanity",
+      "connectors": {
+        "k1": {"x": 7971, "y": 6593, "z": 2667, "dia_mm": 51},
+        "v1": {"x": 8072, "y": 6593, "z": 2921, "dia_mm": 13},
+        "t3": {"x": 7869, "y": 6593, "z": 2921, "dia_mm": 13}
+      }
+    },
+    {
+      "revit_id": 1371846,
+      "tip_a1": "umyvalnik_smesitel",
+      "revit_name": "SinkConnection :: Vanity",
+      "connectors": {
+        "k1": {"x": 8809, "y": 6593, "z": 2667, "dia_mm": 51},
+        "v1": {"x": 8911, "y": 6593, "z": 2921, "dia_mm": 13},
+        "t3": {"x": 8708, "y": 6593, "z": 2921, "dia_mm": 13}
+      }
+    },
+    {
+      "revit_id": 1375766,
+      "tip_a1": "dush_gluboky_poddon",
+      "revit_name": "ShowerConnection :: Shower Rectangular",
+      "connectors": {
+        "k1": {"x": 6698, "y": 5324, "z": 2380, "dia_mm": 102},
+        "v1": {"x": 6749, "y": 5940, "z": 3378, "dia_mm": 13},
+        "t3": {"x": 6647, "y": 5940, "z": 3378, "dia_mm": 13}
+      }
+    },
+    {
+      "revit_id": 1411561,
+      "tip_a1": "stiralnaya",
+      "revit_name": "WasherConnection :: Washer Left Drain",
+      "connectors": {
+        "k1": {"x": 10046, "y": 4712, "z": 2667, "dia_mm": 51},
+        "v1": {"x": 10046, "y": 4478, "z": 3289, "dia_mm": 13},
+        "t3": {"x": 10046, "y": 4539, "z": 3289, "dia_mm": 13}
+      }
+    }
+  ]
+}
