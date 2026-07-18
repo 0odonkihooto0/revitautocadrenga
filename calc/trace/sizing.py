@@ -8,8 +8,10 @@ import math
 
 from calc.sp30 import sewer, water_demand
 
-WATER_SORTAMENT = [15, 20, 25, 32, 40]
-V_MAX_M_S = 1.5  # СП 30.13330.2020, прил. И (КМС до 5) / п. 8.26
+WATER_SORTAMENT = [15, 20, 25, 32, 40, 50, 65, 80, 100]
+# СП 30.13330.2020, п. 8.26: общественные здания при шуме выше 40 дБ — 1,5 м/с;
+# совпадает с прил. И при КМС до 5 (rules/sp30/skorosti_vody.yaml)
+V_MAX_M_S = 1.5
 
 
 def bathroom_flow(fixture_keys: list[str], u: int, q_hr_u: float, kind: str = "tot") -> dict:
@@ -41,6 +43,39 @@ def pick_water_diameter(q_l_s: float, v_max: float = V_MAX_M_S) -> dict:
         if v <= v_max:
             return {"dn": dn, "v_m_s": round(v, 2)}
     raise ValueError(f"Расход {q_l_s} л/с не проходит по сортаменту {WATER_SORTAMENT}")
+
+
+def pick_podvodka(q0_l_s: float, d_min_mm: float | None = None,
+                  v_max: float = V_MAX_M_S) -> int:
+    """Диаметр подводки к прибору, мм: по скорости (п. 8.26) и не меньше табл. А.1.
+
+    q0_l_s — секундный расход прибора; d_min_mm — d_podvodki по табл. А.1
+    (None = «–», не нормируется: диаметр только по скорости).
+    """
+    dn_v = pick_water_diameter(q0_l_s, v_max)["dn"]
+    need = max(dn_v, d_min_mm or 0)
+    for dn in WATER_SORTAMENT:
+        if dn >= need:
+            return dn
+    raise ValueError(f"Подводка {need} мм вне сортамента {WATER_SORTAMENT}")
+
+
+def pick_k1_stack(passport: dict, q_tot_l_s: float, material: str = "pvh",
+                  angle: float = 87.5, otvod_dn: float = 110) -> dict:
+    """Подбор диаметра вентилируемого стояка К1 — СП 30.13330.2020, п. 19.2, прил. К.
+
+    qs = q_tot + q0s_max (ф. 5); диаметр — минимальный по таблицам К.1–К.4,
+    у которого пропускная способность не ниже qs. Если не проходит даже максимальный
+    табличный — ok=False (увеличить диаметр нельзя: рассредоточить расход — п. 19.2).
+    """
+    a1 = [water_demand.fixture(f["tip_a1"]) for f in passport["pribory"]]
+    q0s_max = max(f["q0_s"] for f in a1 if f["q0_s"])
+    qs = water_demand.q_stack_sewer(q_tot_l_s, q0s_max)
+    podbor = sewer.pick_stack_dn(material, otvod_dn, angle, qs)
+    return {
+        "qs_l_s": round(qs, 3), "q0s_max": q0s_max,
+        "dn": podbor["dn"], "capacity_l_s": podbor["capacity_l_s"], "ok": podbor["ok"],
+    }
 
 
 def check_k1_stack(passport: dict, q_tot_l_s: float,

@@ -114,6 +114,37 @@ def stack_capacity_air_valve(material: str, stack_dn: float, otvod_dn: float, an
     raise ValueError(f"Нет строки для отвода {otvod_dn} мм и угла {angle}° (табл. К.8)")
 
 
+def pick_stack_dn(material: str, otvod_dn: float, angle: float, qs_l_s: float) -> dict:
+    """Минимальный диаметр вентилируемого стояка под расход qs — прил. К, п. 19.2.
+
+    Перебирает диаметры строки таблицы К.1–К.4 (для данного отвода и угла) по
+    возрастанию; возвращает {dn, capacity_l_s, ok}. Если расход выше пропускной
+    способности максимального табличного диаметра — ok=False с этим диаметром
+    (по п. 19.2 расход нужно рассредоточить по нескольким стоякам).
+    """
+    if material not in _STACK_TABLES:
+        raise ValueError(f"Материал «{material}»; доступны: {', '.join(_STACK_TABLES)}")
+    rows = load_rule("propusknaya_stoyakov")[_STACK_TABLES[material]]
+    for row in rows:
+        if float(row["otvod_mm"]) == float(otvod_dn) and float(row["ugol_grad"]) == float(angle):
+            candidates = sorted(
+                (float(dn), float(v)) for dn, v in row["qs"].items() if v is not None
+            )
+            if not candidates:
+                raise ValueError(
+                    f"Комбинация отвод {otvod_dn}/угол {angle}° для {material} "
+                    f"не нормируется («–» в таблице)"
+                )
+            for dn, capacity in candidates:
+                if capacity >= qs_l_s:
+                    return {"dn": dn, "capacity_l_s": capacity, "ok": True}
+            dn, capacity = candidates[-1]
+            return {"dn": dn, "capacity_l_s": capacity, "ok": False}
+    raise ValueError(
+        f"Нет строки для отвода {otvod_dn} мм и угла {angle}° ({material}, прил. К)"
+    )
+
+
 def stack_capacity(material: str, stack_dn: float, otvod_dn: float, angle: float) -> float:
     """Пропускная способность вентилируемого стояка, л/с — СП 30.13330.2020, прил. К.
 

@@ -3,6 +3,8 @@
 Табличные значения — из rules/sp30/trebuemyi_napor.yaml и svobodnye_napory.yaml.
 """
 
+import math
+
 from calc.sp30.rules_loader import load_rule
 
 
@@ -14,6 +16,21 @@ def min_free_head_upper_fixture() -> float:
 def max_hydrostatic_head_lower_fixture() -> float:
     """Максимальный гидростатический напор у нижнего прибора, м вод. ст. — п. 7.10."""
     return float(load_rule("svobodnye_napory")["gidrostatichesky_napor_nizhnego_pribora"]["max_m"])
+
+
+def unit_loss_darcy(q_l_s: float, dn_mm: float, nu_m2_s: float = 1.31e-6) -> float:
+    """Удельные потери напора i, м/м — Дарси–Вейсбах, λ по Блазиусу (гладкие трубы).
+
+    Инженерное приближение v0 для подстановки в формулу (15): СП 30.13330.2020,
+    п. 8.28 требует считать потери по данным изготовителей труб; здесь гидравлически
+    гладкая труба, вода ~10 °C (ν = 1,31·10⁻⁶ м²/с). Для рабочего расчёта заменить
+    на таблицы производителя.
+    """
+    d = dn_mm / 1000.0
+    v = (q_l_s / 1000.0) / (math.pi * d * d / 4.0)
+    re = v * d / nu_m2_s
+    lam = 64.0 / re if re < 2300.0 else 0.3164 / re ** 0.25
+    return lam * v * v / (2.0 * 9.81 * d)
 
 
 def pipe_section_loss(i: float, length_m: float, network: str = "hoz_pitevoy_zhilyh_obshchestvennyh") -> float:

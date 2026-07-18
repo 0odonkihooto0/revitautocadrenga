@@ -1,0 +1,977 @@
+{
+ "obekt": "Snowdon Towers Sample Architectural — этаж L1 (вид L1, id 1350581)",
+ "sozdano": "2026-07-18, аналитик v0.1: кластеризация приборов АР-модели, коннекторы синтезированы по нормам (calc/trace/connectors.py) — у АР-семейств нет MEP-коннекторов",
+ "koordinaty": "мм, внутренняя система координат модели; Z — абсолютная отметка",
+ "pipe_type": {
+  "revit_id": 181474,
+  "name": "Default"
+ },
+ "sistemy": {
+  "K1": {
+   "revit_id": 159911,
+   "name": "Sanitary"
+  },
+  "V1": {
+   "revit_id": 159913,
+   "name": "Domestic Cold Water"
+  },
+  "T3": {
+   "revit_id": 159912,
+   "name": "Domestic Hot Water"
+  }
+ },
+ "dopushcheniya": [
+  "⚠️ Toilet-Commercial-Wall принят унитазом со смывным краном (табл. А.1 поз. 17) — подтвердить тип смыва инженеру",
+  "⚠️ позиции стояков К1 и шахт В1/Т3 — допущение аналитика (у стены-хоста/в шахте Chase); подтвердить инженеру",
+  "⚠️ трапы Floor Drain-2D в модели размещены с аномальными отметками (выше пола блока); приняты в уровне чистого пола своего кластера",
+  "⚠️ высоты канализационных выпусков и подводок под бортом — конструктивные допущения (нормами не заданы), см. calc/trace/connectors.py",
+  "⚠️ мойки общепита сливают в пол (разрыв струи в напольные трапы) — упрощение v0",
+  "⚠️ U и q_hr_u — демонстрационные значения (табл. А.2 не оцифрована); задать инженеру",
+  "водоразборная арматура (Mop Sink Faucet, Faucet_Combo, Faucet_Swing) отдельными приборами не считается — учтена расходами своих моек"
+ ],
+ "vvod": {
+  "z_mm": -5156.0,
+  "garantirovanny_napor_m": null,
+  "kommentariy": "⚠️ отметка оси ввода принята по уровню Parking (-5156); гарантированный напор городской сети — задание инженера"
+ },
+ "klastery": [
+  {
+   "id": "wc_b35",
+   "opisanie": "санузлы Block 35 (2 WC + 2 умывальника + 2 трапа)",
+   "uroven": {
+    "name": "L1 - Block 35",
+    "otmetka_mm": -1803.4
+   },
+   "axis": "y",
+   "stena": {
+    "revit_id": 737373,
+    "os_x": -19888.2,
+    "width_mm": 184.2
+   },
+   "stoyak_k1": {
+    "x": -19696.1,
+    "y": 8574.0,
+    "z_kollektora": -2203.4,
+    "kommentariy": "⚠️ позиция — допущение аналитика"
+   },
+   "tochka_podkl_voda": {
+    "x": -19696.1,
+    "y": 8574.0,
+    "z_mag": 896.5999999999999,
+    "kommentariy": "⚠️ шахта В1/Т3 рядом со стояком К1, магистраль под потолком — допущение"
+   },
+   "zadanie_inzhenera": {
+    "U_potrebiteley": 20,
+    "q_hr_u_l": 15.6,
+    "kommentariy": "⚠️ демо-значения для формулы (3), табл. А.2 не оцифрована"
+   },
+   "pribory": [
+    {
+     "revit_id": 1248448,
+     "tip_a1": "unitaz_kran",
+     "revit_name": "Toilet-Commercial-Wall-3D :: 19\" Seat Height",
+     "connectors": {
+      "k1": {
+       "x": -19888.2,
+       "y": 6734.2,
+       "z": -1623.4,
+       "dia_mm": 85
+      },
+      "v1": {
+       "x": -19888.2,
+       "y": 6834.2,
+       "z": -1003.4000000000001,
+       "dia_mm": null,
+       "istochnik_vysoty": "СП 73.13330.2016, п. 6.2.1 (смывные краны унитазов)"
+      }
+     }
+    },
+    {
+     "revit_id": 1248519,
+     "tip_a1": "umyvalnik_smesitel",
+     "revit_name": "Sink-Wall-Barrier Free-3D :: 22\" x 27\"",
+     "connectors": {
+      "k1": {
+       "x": -19888.2,
+       "y": 8080.4,
+       "z": -1303.4,
+       "dia_mm": 32
+      },
+      "v1": {
+       "x": -19888.2,
+       "y": 8180.4,
+       "z": -1203.4,
+       "dia_mm": 10,
+       "istochnik_vysoty": "конструктивно под бортом прибора (⚠️ допущение v0)"
+      },
+      "t3": {
+       "x": -19888.2,
+       "y": 7980.4,
+       "z": -1203.4,
+       "dia_mm": 10,
+       "istochnik_vysoty": "конструктивно под бортом прибора (⚠️ допущение v0)"
+      }
+     }
+    },
+    {
+     "revit_id": 1248771,
+     "tip_a1": "trap_du50",
+     "revit_name": "Floor Drain-2D :: Floor Drain-2D",
+     "connectors": {
+      "k1": {
+       "x": -18653.1,
+       "y": 7343.8,
+       "z": -1803.4,
+       "dia_mm": 50
+      }
+     }
+    },
+    {
+     "revit_id": 1248927,
+     "tip_a1": "unitaz_kran",
+     "revit_name": "Toilet-Commercial-Wall-3D :: 19\" Seat Height",
+     "connectors": {
+      "k1": {
+       "x": -19888.2,
+       "y": 10414.0,
+       "z": -1623.4,
+       "dia_mm": 85
+      },
+      "v1": {
+       "x": -19888.2,
+       "y": 10514.0,
+       "z": -1003.4000000000001,
+       "dia_mm": null,
+       "istochnik_vysoty": "СП 73.13330.2016, п. 6.2.1 (смывные краны унитазов)"
+      }
+     }
+    },
+    {
+     "revit_id": 1248928,
+     "tip_a1": "umyvalnik_smesitel",
+     "revit_name": "Sink-Wall-Barrier Free-3D :: 22\" x 27\"",
+     "connectors": {
+      "k1": {
+       "x": -19888.2,
+       "y": 9067.8,
+       "z": -1303.4,
+       "dia_mm": 32
+      },
+      "v1": {
+       "x": -19888.2,
+       "y": 9167.8,
+       "z": -1203.4,
+       "dia_mm": 10,
+       "istochnik_vysoty": "конструктивно под бортом прибора (⚠️ допущение v0)"
+      },
+      "t3": {
+       "x": -19888.2,
+       "y": 8967.8,
+       "z": -1203.4,
+       "dia_mm": 10,
+       "istochnik_vysoty": "конструктивно под бортом прибора (⚠️ допущение v0)"
+      }
+     }
+    },
+    {
+     "revit_id": 1248934,
+     "tip_a1": "trap_du50",
+     "revit_name": "Floor Drain-2D :: Floor Drain-2D",
+     "connectors": {
+      "k1": {
+       "x": -18653.1,
+       "y": 9804.4,
+       "z": -1803.4,
+       "dia_mm": 50
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "wc_b37_sever",
+   "opisanie": "санузлы Block 37 северные (шахта Chase)",
+   "uroven": {
+    "name": "L1 - Block 37",
+    "otmetka_mm": -1054.1
+   },
+   "axis": "y",
+   "stena": {
+    "revit_id": 1300721,
+    "os_x": -11961.8,
+    "width_mm": 79.4
+   },
+   "stoyak_k1": {
+    "x": -12101.5,
+    "y": 8598.0,
+    "z_kollektora": -1454.1,
+    "kommentariy": "⚠️ позиция — допущение аналитика"
+   },
+   "tochka_podkl_voda": {
+    "x": -12101.5,
+    "y": 8598.0,
+    "z_mag": 1645.9,
+    "kommentariy": "⚠️ шахта В1/Т3 рядом со стояком К1, магистраль под потолком — допущение"
+   },
+   "zadanie_inzhenera": {
+    "U_potrebiteley": 20,
+    "q_hr_u_l": 15.6,
+    "kommentariy": "⚠️ демо-значения для формулы (3), табл. А.2 не оцифрована"
+   },
+   "pribory": [
+    {
+     "revit_id": 1389105,
+     "tip_a1": "unitaz_kran",
+     "revit_name": "Toilet-Commercial-Wall-3D :: 19\" Seat Height",
+     "connectors": {
+      "k1": {
+       "x": -11961.8,
+       "y": 6758.0,
+       "z": -874.0999999999999,
+       "dia_mm": 85
+      },
+      "v1": {
+       "x": -11961.8,
+       "y": 6858.0,
+       "z": -254.0999999999999,
+       "dia_mm": null,
+       "istochnik_vysoty": "СП 73.13330.2016, п. 6.2.1 (смывные краны унитазов)"
+      }
+     }
+    },
+    {
+     "revit_id": 1389106,
+     "tip_a1": "umyvalnik_smesitel",
+     "revit_name": "Sink-Wall-Barrier Free-3D :: 22\" x 27\"",
+     "connectors": {
+      "k1": {
+       "x": -11961.8,
+       "y": 8104.2,
+       "z": -554.0999999999999,
+       "dia_mm": 32
+      },
+      "v1": {
+       "x": -11961.8,
+       "y": 8204.2,
+       "z": -454.0999999999999,
+       "dia_mm": 10,
+       "istochnik_vysoty": "конструктивно под бортом прибора (⚠️ допущение v0)"
+      },
+      "t3": {
+       "x": -11961.8,
+       "y": 8004.2,
+       "z": -454.0999999999999,
+       "dia_mm": 10,
+       "istochnik_vysoty": "конструктивно под бортом прибора (⚠️ допущение v0)"
+      }
+     }
+    },
+    {
+     "revit_id": 1389108,
+     "tip_a1": "trap_du50",
+     "revit_name": "Floor Drain-2D :: Floor Drain-2D",
+     "connectors": {
+      "k1": {
+       "x": -10858.5,
+       "y": 7367.6,
+       "z": -1054.1,
+       "dia_mm": 50
+      }
+     }
+    },
+    {
+     "revit_id": 1389110,
+     "tip_a1": "unitaz_kran",
+     "revit_name": "Toilet-Commercial-Wall-3D :: 19\" Seat Height",
+     "connectors": {
+      "k1": {
+       "x": -11961.8,
+       "y": 10437.8,
+       "z": -874.0999999999999,
+       "dia_mm": 85
+      },
+      "v1": {
+       "x": -11961.8,
+       "y": 10537.8,
+       "z": -254.0999999999999,
+       "dia_mm": null,
+       "istochnik_vysoty": "СП 73.13330.2016, п. 6.2.1 (смывные краны унитазов)"
+      }
+     }
+    },
+    {
+     "revit_id": 1389111,
+     "tip_a1": "umyvalnik_smesitel",
+     "revit_name": "Sink-Wall-Barrier Free-3D :: 22\" x 27\"",
+     "connectors": {
+      "k1": {
+       "x": -11961.8,
+       "y": 9091.6,
+       "z": -554.0999999999999,
+       "dia_mm": 32
+      },
+      "v1": {
+       "x": -11961.8,
+       "y": 9191.6,
+       "z": -454.0999999999999,
+       "dia_mm": 10,
+       "istochnik_vysoty": "конструктивно под бортом прибора (⚠️ допущение v0)"
+      },
+      "t3": {
+       "x": -11961.8,
+       "y": 8991.6,
+       "z": -454.0999999999999,
+       "dia_mm": 10,
+       "istochnik_vysoty": "конструктивно под бортом прибора (⚠️ допущение v0)"
+      }
+     }
+    },
+    {
+     "revit_id": 1389113,
+     "tip_a1": "trap_du50",
+     "revit_name": "Floor Drain-2D :: Floor Drain-2D",
+     "connectors": {
+      "k1": {
+       "x": -10858.5,
+       "y": 9828.2,
+       "z": -1054.1,
+       "dia_mm": 50
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "wc_b37_yug",
+   "opisanie": "санузлы Block 37 южные",
+   "uroven": {
+    "name": "L1 - Block 37",
+    "otmetka_mm": -1054.1
+   },
+   "axis": "y",
+   "stena": {
+    "revit_id": 676300,
+    "os_x": -6172.2,
+    "width_mm": 298.5
+   },
+   "stoyak_k1": {
+    "x": -5923.0,
+    "y": 3377.0,
+    "z_kollektora": -1454.1,
+    "kommentariy": "⚠️ позиция — допущение аналитика"
+   },
+   "tochka_podkl_voda": {
+    "x": -5923.0,
+    "y": 3377.0,
+    "z_mag": 1645.9,
+    "kommentariy": "⚠️ шахта В1/Т3 рядом со стояком К1, магистраль под потолком — допущение"
+   },
+   "zadanie_inzhenera": {
+    "U_potrebiteley": 20,
+    "q_hr_u_l": 15.6,
+    "kommentariy": "⚠️ демо-значения для формулы (3), табл. А.2 не оцифрована"
+   },
+   "pribory": [
+    {
+     "revit_id": 1392647,
+     "tip_a1": "unitaz_kran",
+     "revit_name": "Toilet-Commercial-Wall-3D :: 19\" Seat Height",
+     "connectors": {
+      "k1": {
+       "x": -6172.2,
+       "y": 3895.7,
+       "z": -874.0999999999999,
+       "dia_mm": 85
+      },
+      "v1": {
+       "x": -6172.2,
+       "y": 3995.7,
+       "z": -254.0999999999999,
+       "dia_mm": null,
+       "istochnik_vysoty": "СП 73.13330.2016, п. 6.2.1 (смывные краны унитазов)"
+      }
+     }
+    },
+    {
+     "revit_id": 1392648,
+     "tip_a1": "umyvalnik_smesitel",
+     "revit_name": "Sink-Wall-Barrier Free-3D :: 22\" x 27\"",
+     "connectors": {
+      "k1": {
+       "x": -6172.2,
+       "y": 5191.1,
+       "z": -554.0999999999999,
+       "dia_mm": 32
+      },
+      "v1": {
+       "x": -6172.2,
+       "y": 5291.1,
+       "z": -454.0999999999999,
+       "dia_mm": 10,
+       "istochnik_vysoty": "конструктивно под бортом прибора (⚠️ допущение v0)"
+      },
+      "t3": {
+       "x": -6172.2,
+       "y": 5091.1,
+       "z": -454.0999999999999,
+       "dia_mm": 10,
+       "istochnik_vysoty": "конструктивно под бортом прибора (⚠️ допущение v0)"
+      }
+     }
+    },
+    {
+     "revit_id": 1392652,
+     "tip_a1": "trap_du50",
+     "revit_name": "Floor Drain-2D :: Floor Drain-2D",
+     "connectors": {
+      "k1": {
+       "x": -4880.0,
+       "y": 4454.5,
+       "z": -1054.1,
+       "dia_mm": 50
+      }
+     }
+    },
+    {
+     "revit_id": 1393334,
+     "tip_a1": "trap_du50",
+     "revit_name": "Floor Drain-2D :: Floor Drain-2D",
+     "connectors": {
+      "k1": {
+       "x": -4880.0,
+       "y": 2247.9,
+       "z": -1054.1,
+       "dia_mm": 50
+      }
+     }
+    },
+    {
+     "revit_id": 1393512,
+     "tip_a1": "unitaz_kran",
+     "revit_name": "Toilet-Commercial-Wall-3D :: 19\" Seat Height",
+     "connectors": {
+      "k1": {
+       "x": -6172.2,
+       "y": 2857.5,
+       "z": -874.0999999999999,
+       "dia_mm": 85
+      },
+      "v1": {
+       "x": -6172.2,
+       "y": 2957.5,
+       "z": -254.0999999999999,
+       "dia_mm": null,
+       "istochnik_vysoty": "СП 73.13330.2016, п. 6.2.1 (смывные краны унитазов)"
+      }
+     }
+    },
+    {
+     "revit_id": 1393513,
+     "tip_a1": "umyvalnik_smesitel",
+     "revit_name": "Sink-Wall-Barrier Free-3D :: 22\" x 27\"",
+     "connectors": {
+      "k1": {
+       "x": -6172.2,
+       "y": 1511.3,
+       "z": -554.0999999999999,
+       "dia_mm": 32
+      },
+      "v1": {
+       "x": -6172.2,
+       "y": 1611.3,
+       "z": -454.0999999999999,
+       "dia_mm": 10,
+       "istochnik_vysoty": "конструктивно под бортом прибора (⚠️ допущение v0)"
+      },
+      "t3": {
+       "x": -6172.2,
+       "y": 1411.3,
+       "z": -454.0999999999999,
+       "dia_mm": 10,
+       "istochnik_vysoty": "конструктивно под бортом прибора (⚠️ допущение v0)"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "wc_b37_vostok",
+   "opisanie": "санузлы Block 37 восточные (у наружной стены)",
+   "uroven": {
+    "name": "L1 - Block 37",
+    "otmetka_mm": -1054.1
+   },
+   "axis": "x",
+   "stena": {
+    "revit_id": 678361,
+    "os_y": 12869.9,
+    "width_mm": 320.7
+   },
+   "stoyak_k1": {
+    "x": 12350.0,
+    "y": 12609.6,
+    "z_kollektora": -1454.1,
+    "kommentariy": "⚠️ позиция — допущение аналитика"
+   },
+   "tochka_podkl_voda": {
+    "x": 12350.0,
+    "y": 12609.6,
+    "z_mag": 1645.9,
+    "kommentariy": "⚠️ шахта В1/Т3 рядом со стояком К1, магистраль под потолком — допущение"
+   },
+   "zadanie_inzhenera": {
+    "U_potrebiteley": 20,
+    "q_hr_u_l": 15.6,
+    "kommentariy": "⚠️ демо-значения для формулы (3), табл. А.2 не оцифрована"
+   },
+   "pribory": [
+    {
+     "revit_id": 874809,
+     "tip_a1": "umyvalnik_smesitel",
+     "revit_name": "Sink-Wall-Barrier Free-3D :: 22\" x 27\"",
+     "connectors": {
+      "k1": {
+       "x": 10417.2,
+       "y": 12869.9,
+       "z": -554.0999999999999,
+       "dia_mm": 32
+      },
+      "v1": {
+       "x": 10517.2,
+       "y": 12869.9,
+       "z": -454.0999999999999,
+       "dia_mm": 10,
+       "istochnik_vysoty": "конструктивно под бортом прибора (⚠️ допущение v0)"
+      },
+      "t3": {
+       "x": 10317.2,
+       "y": 12869.9,
+       "z": -454.0999999999999,
+       "dia_mm": 10,
+       "istochnik_vysoty": "конструктивно под бортом прибора (⚠️ допущение v0)"
+      }
+     }
+    },
+    {
+     "revit_id": 874817,
+     "tip_a1": "trap_du50",
+     "revit_name": "Floor Drain-2D :: Floor Drain-2D",
+     "connectors": {
+      "k1": {
+       "x": 11153.8,
+       "y": 11557.0,
+       "z": -1054.1,
+       "dia_mm": 50
+      }
+     }
+    },
+    {
+     "revit_id": 1390242,
+     "tip_a1": "trap_du50",
+     "revit_name": "Floor Drain-2D :: Floor Drain-2D",
+     "connectors": {
+      "k1": {
+       "x": 8693.2,
+       "y": 11557.0,
+       "z": -1054.1,
+       "dia_mm": 50
+      }
+     }
+    },
+    {
+     "revit_id": 1921146,
+     "tip_a1": "unitaz_kran",
+     "revit_name": "Toilet-Commercial-Wall-3D :: 19\" Seat Height",
+     "connectors": {
+      "k1": {
+       "x": 8083.6,
+       "y": 12869.9,
+       "z": -874.0999999999999,
+       "dia_mm": 85
+      },
+      "v1": {
+       "x": 8183.6,
+       "y": 12869.9,
+       "z": -254.0999999999999,
+       "dia_mm": null,
+       "istochnik_vysoty": "СП 73.13330.2016, п. 6.2.1 (смывные краны унитазов)"
+      }
+     }
+    },
+    {
+     "revit_id": 1921147,
+     "tip_a1": "unitaz_kran",
+     "revit_name": "Toilet-Commercial-Wall-3D :: 19\" Seat Height",
+     "connectors": {
+      "k1": {
+       "x": 11763.4,
+       "y": 12869.9,
+       "z": -874.0999999999999,
+       "dia_mm": 85
+      },
+      "v1": {
+       "x": 11863.4,
+       "y": 12869.9,
+       "z": -254.0999999999999,
+       "dia_mm": null,
+       "istochnik_vysoty": "СП 73.13330.2016, п. 6.2.1 (смывные краны унитазов)"
+      }
+     }
+    },
+    {
+     "revit_id": 1921148,
+     "tip_a1": "umyvalnik_smesitel",
+     "revit_name": "Sink-Wall-Barrier Free-3D :: 22\" x 27\"",
+     "connectors": {
+      "k1": {
+       "x": 9429.8,
+       "y": 12869.9,
+       "z": -554.0999999999999,
+       "dia_mm": 32
+      },
+      "v1": {
+       "x": 9529.8,
+       "y": 12869.9,
+       "z": -454.0999999999999,
+       "dia_mm": 10,
+       "istochnik_vysoty": "конструктивно под бортом прибора (⚠️ допущение v0)"
+      },
+      "t3": {
+       "x": 9329.8,
+       "y": 12869.9,
+       "z": -454.0999999999999,
+       "dia_mm": 10,
+       "istochnik_vysoty": "конструктивно под бортом прибора (⚠️ допущение v0)"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "wc_b43",
+   "opisanie": "санузлы Block 43 (шахта Chase)",
+   "uroven": {
+    "name": "L1 - Block 43",
+    "otmetka_mm": 0.0
+   },
+   "axis": "y",
+   "stena": {
+    "revit_id": 1391115,
+    "os_x": 12827.0,
+    "width_mm": 108.0
+   },
+   "stoyak_k1": {
+    "x": 12673.0,
+    "y": 10403.0,
+    "z_kollektora": -400.0,
+    "kommentariy": "⚠️ позиция — допущение аналитика"
+   },
+   "tochka_podkl_voda": {
+    "x": 12673.0,
+    "y": 10403.0,
+    "z_mag": 2700.0,
+    "kommentariy": "⚠️ шахта В1/Т3 рядом со стояком К1, магистраль под потолком — допущение"
+   },
+   "zadanie_inzhenera": {
+    "U_potrebiteley": 20,
+    "q_hr_u_l": 15.6,
+    "kommentariy": "⚠️ демо-значения для формулы (3), табл. А.2 не оцифрована"
+   },
+   "pribory": [
+    {
+     "revit_id": 1390775,
+     "tip_a1": "unitaz_kran",
+     "revit_name": "Toilet-Commercial-Wall-3D :: 19\" Seat Height",
+     "connectors": {
+      "k1": {
+       "x": 12827.0,
+       "y": 8563.0,
+       "z": 180.0,
+       "dia_mm": 85
+      },
+      "v1": {
+       "x": 12827.0,
+       "y": 8663.0,
+       "z": 800.0,
+       "dia_mm": null,
+       "istochnik_vysoty": "СП 73.13330.2016, п. 6.2.1 (смывные краны унитазов)"
+      }
+     }
+    },
+    {
+     "revit_id": 1390776,
+     "tip_a1": "umyvalnik_smesitel",
+     "revit_name": "Sink-Wall-Barrier Free-3D :: 22\" x 27\"",
+     "connectors": {
+      "k1": {
+       "x": 12827.0,
+       "y": 9909.2,
+       "z": 500.0,
+       "dia_mm": 32
+      },
+      "v1": {
+       "x": 12827.0,
+       "y": 10009.2,
+       "z": 600.0,
+       "dia_mm": 10,
+       "istochnik_vysoty": "конструктивно под бортом прибора (⚠️ допущение v0)"
+      },
+      "t3": {
+       "x": 12827.0,
+       "y": 9809.2,
+       "z": 600.0,
+       "dia_mm": 10,
+       "istochnik_vysoty": "конструктивно под бортом прибора (⚠️ допущение v0)"
+      }
+     }
+    },
+    {
+     "revit_id": 1390780,
+     "tip_a1": "unitaz_kran",
+     "revit_name": "Toilet-Commercial-Wall-3D :: 19\" Seat Height",
+     "connectors": {
+      "k1": {
+       "x": 12827.0,
+       "y": 12242.8,
+       "z": 180.0,
+       "dia_mm": 85
+      },
+      "v1": {
+       "x": 12827.0,
+       "y": 12342.8,
+       "z": 800.0,
+       "dia_mm": null,
+       "istochnik_vysoty": "СП 73.13330.2016, п. 6.2.1 (смывные краны унитазов)"
+      }
+     }
+    },
+    {
+     "revit_id": 1390781,
+     "tip_a1": "umyvalnik_smesitel",
+     "revit_name": "Sink-Wall-Barrier Free-3D :: 22\" x 27\"",
+     "connectors": {
+      "k1": {
+       "x": 12827.0,
+       "y": 10896.6,
+       "z": 500.0,
+       "dia_mm": 32
+      },
+      "v1": {
+       "x": 12827.0,
+       "y": 10996.6,
+       "z": 600.0,
+       "dia_mm": 10,
+       "istochnik_vysoty": "конструктивно под бортом прибора (⚠️ допущение v0)"
+      },
+      "t3": {
+       "x": 12827.0,
+       "y": 10796.6,
+       "z": 600.0,
+       "dia_mm": 10,
+       "istochnik_vysoty": "конструктивно под бортом прибора (⚠️ допущение v0)"
+      }
+     }
+    },
+    {
+     "revit_id": 1391816,
+     "tip_a1": "trap_du50",
+     "revit_name": "Floor Drain-2D :: Floor Drain-2D",
+     "connectors": {
+      "k1": {
+       "x": 13846.2,
+       "y": 11633.2,
+       "z": 0.0,
+       "dia_mm": 50
+      }
+     }
+    },
+    {
+     "revit_id": 1391901,
+     "tip_a1": "trap_du50",
+     "revit_name": "Floor Drain-2D :: Floor Drain-2D",
+     "connectors": {
+      "k1": {
+       "x": 13846.2,
+       "y": 9274.2,
+       "z": 0.0,
+       "dia_mm": 50
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "kuhnya_b35",
+   "opisanie": "производственная кухня Block 35 (мойки + напольные трапы)",
+   "uroven": {
+    "name": "L1 - Block 35",
+    "otmetka_mm": -1803.4
+   },
+   "axis": "x",
+   "stena": {
+    "revit_id": 697710,
+    "os_y": 12869.9,
+    "width_mm": 320.7
+   },
+   "stoyak_k1": {
+    "x": -30097.5,
+    "y": 12609.6,
+    "z_kollektora": -2203.4,
+    "kommentariy": "⚠️ позиция — допущение аналитика"
+   },
+   "tochka_podkl_voda": {
+    "x": -30097.5,
+    "y": 12609.6,
+    "z_mag": 896.5999999999999,
+    "kommentariy": "⚠️ шахта В1/Т3 рядом со стояком К1, магистраль под потолком — допущение"
+   },
+   "zadanie_inzhenera": {
+    "U_potrebiteley": 20,
+    "q_hr_u_l": 15.6,
+    "kommentariy": "⚠️ демо-значения для формулы (3), табл. А.2 не оцифрована"
+   },
+   "pribory": [
+    {
+     "revit_id": 1135932,
+     "tip_a1": "moyka_obshchepit",
+     "revit_name": "Sink-3 Basin :: 91\" Width",
+     "connectors": {
+      "k1": {
+       "x": -22745.7,
+       "y": 12331.7,
+       "z": -1803.4,
+       "dia_mm": 50
+      },
+      "v1": {
+       "x": -22645.7,
+       "y": 12331.7,
+       "z": -1203.4,
+       "dia_mm": 15,
+       "istochnik_vysoty": "конструктивно под бортом прибора (⚠️ допущение v0)"
+      },
+      "t3": {
+       "x": -22845.7,
+       "y": 12331.7,
+       "z": -1203.4,
+       "dia_mm": 15,
+       "istochnik_vysoty": "конструктивно под бортом прибора (⚠️ допущение v0)"
+      }
+     }
+    },
+    {
+     "revit_id": 1135933,
+     "tip_a1": "moyka_obshchepit",
+     "revit_name": "Sink-Produce :: 101\" Width",
+     "connectors": {
+      "k1": {
+       "x": -28902.0,
+       "y": 12280.9,
+       "z": -1803.4,
+       "dia_mm": 50
+      },
+      "v1": {
+       "x": -28802.0,
+       "y": 12280.9,
+       "z": -1203.4,
+       "dia_mm": 15,
+       "istochnik_vysoty": "конструктивно под бортом прибора (⚠️ допущение v0)"
+      },
+      "t3": {
+       "x": -29002.0,
+       "y": 12280.9,
+       "z": -1203.4,
+       "dia_mm": 15,
+       "istochnik_vysoty": "конструктивно под бортом прибора (⚠️ допущение v0)"
+      }
+     }
+    },
+    {
+     "revit_id": 1135940,
+     "tip_a1": "umyvalnik_smesitel",
+     "revit_name": "Hand Sink :: Hand Sink",
+     "connectors": {
+      "k1": {
+       "x": -27862.2,
+       "y": 10560.1,
+       "z": -1303.4,
+       "dia_mm": 32
+      },
+      "v1": {
+       "x": -27762.2,
+       "y": 10560.1,
+       "z": -1203.4,
+       "dia_mm": 10,
+       "istochnik_vysoty": "конструктивно под бортом прибора (⚠️ допущение v0)"
+      },
+      "t3": {
+       "x": -27962.2,
+       "y": 10560.1,
+       "z": -1203.4,
+       "dia_mm": 10,
+       "istochnik_vysoty": "конструктивно под бортом прибора (⚠️ допущение v0)"
+      }
+     }
+    },
+    {
+     "revit_id": 1135948,
+     "tip_a1": "rakovina_kran",
+     "revit_name": "Mop Sink_Rect :: 30\"x22\"",
+     "connectors": {
+      "k1": {
+       "x": -30197.4,
+       "y": 10941.1,
+       "z": -1803.4,
+       "dia_mm": 40
+      },
+      "v1": {
+       "x": -30097.4,
+       "y": 10941.1,
+       "z": -1203.4,
+       "dia_mm": 10,
+       "istochnik_vysoty": "конструктивно под бортом прибора (⚠️ допущение v0)"
+      }
+     }
+    },
+    {
+     "revit_id": 1135972,
+     "tip_a1": "trap_du100",
+     "revit_name": "Plumb_Floor Sink :: Partial Grate",
+     "connectors": {
+      "k1": {
+       "x": -23190.2,
+       "y": 12331.7,
+       "z": -1803.4,
+       "dia_mm": 100
+      }
+     }
+    },
+    {
+     "revit_id": 1135973,
+     "tip_a1": "trap_du100",
+     "revit_name": "Plumb_Floor Sink :: Partial Grate",
+     "connectors": {
+      "k1": {
+       "x": -29216.4,
+       "y": 12280.9,
+       "z": -1803.4,
+       "dia_mm": 100
+      }
+     }
+    },
+    {
+     "revit_id": 1135974,
+     "tip_a1": "trap_du100",
+     "revit_name": "Plumb_Floor Sink :: Full Grate",
+     "connectors": {
+      "k1": {
+       "x": -24660.2,
+       "y": 10337.8,
+       "z": -1803.4,
+       "dia_mm": 100
+      }
+     }
+    }
+   ]
+  }
+ ]
+}
