@@ -5,6 +5,9 @@ description = "База знаний норм ВК: структурирован
 requires-python = ">=3.11"
 dependencies = [
     "pyyaml>=6.0",
+    "mcp>=1.9",
+    "rank-bm25>=0.2",
+    "snowballstemmer>=2.2",
 ]
 
 [dependency-groups]
