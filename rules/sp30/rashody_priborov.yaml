@@ -1,0 +1,319 @@
+# Расчётные расходы воды и стоков для санитарно-технических приборов
+# Слой 1 базы знаний (см. docs/02-arhitektura.md §4)
+rule: fixture_flow_rates
+source: "СП 30.13330.2020, приложение А, таблица А.1"
+verified: "сверено с PDF ФАУ ФЦС (стр. документа 96–97), 2026-07-18"
+units:
+  q0_tot: "л/с, общий секундный расход"
+  q0_c: "л/с, секундный расход холодной воды"
+  q0_h: "л/с, секундный расход горячей воды"
+  q0_hr_tot: "л/ч, общий часовой расход"
+  q0_hr_c: "л/ч, часовой расход холодной воды"
+  q0_hr_h: "л/ч, часовой расход горячей воды"
+  q0_s: "л/с, расход стоков от прибора"
+  d_podvodki: "мм, минимальный диаметр условного прохода подводки"
+  d_otvoda: "мм, минимальный диаметр условного прохода отвода"
+# null = «–» в таблице (не нормируется)
+fixtures:
+  umyvalnik_kran:
+    name: "1 Умывальник, рукомойник с водоразборным краном"
+    q0_tot: 0.1
+    q0_c: 0.1
+    q0_h: null
+    q0_hr_tot: 30
+    q0_hr_c: 30
+    q0_hr_h: null
+    q0_s: 0.15
+    d_podvodki: 10
+    d_otvoda: 32
+  umyvalnik_smesitel:
+    name: "2 Умывальник, рукомойник со смесителем"
+    q0_tot: 0.12
+    q0_c: 0.09
+    q0_h: 0.09
+    q0_hr_tot: 60
+    q0_hr_c: 40
+    q0_hr_h: 40
+    q0_s: 0.15
+    d_podvodki: 10
+    d_otvoda: 32
+  rakovina_kran:
+    name: "3 Раковина, мойка инвентарная с водоразборным краном и колонка лабораторная водоразборная"
+    q0_tot: 0.15
+    q0_c: 0.15
+    q0_h: null
+    q0_hr_tot: 50
+    q0_hr_c: 50
+    q0_hr_h: null
+    q0_s: 0.3
+    d_podvodki: 10
+    d_otvoda: 40
+  moyka_smesitel:
+    name: "4 Мойка (в том числе лабораторная) со смесителем"
+    q0_tot: 0.12
+    q0_c: 0.09
+    q0_h: 0.09
+    q0_hr_tot: 80
+    q0_hr_c: 60
+    q0_hr_h: 60
+    q0_s: 1.0
+    d_podvodki: 10
+    d_otvoda: 40
+  moyka_obshchepit:
+    name: "5 Мойка (для предприятий общественного питания) со смесителем"
+    q0_tot: 0.3
+    q0_c: 0.2
+    q0_h: 0.2
+    q0_hr_tot: 500
+    q0_hr_c: 280
+    q0_hr_h: 220
+    q0_s: 1.0
+    d_podvodki: 15
+    d_otvoda: 50
+  vanna_smesitel:
+    name: "6 Ванна со смесителем (в том числе общим для ванн и умывальника)"
+    q0_tot: 0.25
+    q0_c: 0.18
+    q0_h: 0.18
+    q0_hr_tot: 300
+    q0_hr_c: 200
+    q0_hr_h: 200
+    q0_s: 1.1
+    d_podvodki: 10
+    d_otvoda: 40
+  vanna_kolonka:
+    name: "7 Ванна с водогрейной колонкой и смесителем"
+    q0_tot: 0.22
+    q0_c: 0.22
+    q0_h: null
+    q0_hr_tot: 300
+    q0_hr_c: 300
+    q0_hr_h: null
+    q0_s: 1.1
+    d_podvodki: 15
+    d_otvoda: 40
+  vanna_med_du20:
+    name: "8 Ванна медицинская со смесителем условным диаметром 20 мм"
+    q0_tot: 0.4
+    q0_c: 0.3
+    q0_h: 0.3
+    q0_hr_tot: 700
+    q0_hr_c: 460
+    q0_hr_h: 460
+    q0_s: 2.3
+    d_podvodki: 20
+    d_otvoda: 50
+  vanna_med_du25:
+    name: "8 Ванна медицинская со смесителем условным диаметром 25 мм"
+    q0_tot: 0.6
+    q0_c: 0.4
+    q0_h: 0.4
+    q0_hr_tot: 750
+    q0_hr_c: 500
+    q0_hr_h: 500
+    q0_s: 3
+    d_podvodki: 25
+    d_otvoda: 75
+  vanna_med_du32:
+    name: "8 Ванна медицинская со смесителем условным диаметром 32 мм"
+    q0_tot: 1.4
+    q0_c: 1
+    q0_h: 1
+    q0_hr_tot: 1060
+    q0_hr_c: 710
+    q0_hr_h: 710
+    q0_s: 3
+    d_podvodki: 32
+    d_otvoda: 75
+  vanna_nozhnaya:
+    name: "9 Ванна ножная со смесителем"
+    q0_tot: 0.1
+    q0_c: 0.07
+    q0_h: 0.07
+    q0_hr_tot: 220
+    q0_hr_c: 165
+    q0_hr_h: 165
+    q0_s: 0.5
+    d_podvodki: 10
+    d_otvoda: 40
+  dush_melky_poddon:
+    name: "10 Душевая кабина с мелким душевым поддоном и смесителем"
+    q0_tot: 0.12
+    q0_c: 0.09
+    q0_h: 0.09
+    q0_hr_tot: 100
+    q0_hr_c: 60
+    q0_hr_h: 60
+    q0_s: 0.2
+    d_podvodki: 10
+    d_otvoda: 40
+  dush_gluboky_poddon:
+    name: "11 Душевая кабина с глубоким душевым поддоном и смесителем"
+    q0_tot: 0.12
+    q0_c: 0.09
+    q0_h: 0.09
+    q0_hr_tot: 115
+    q0_hr_c: 80
+    q0_hr_h: 80
+    q0_s: 0.6
+    d_podvodki: 10
+    d_otvoda: 40
+  dush_gruppovoy:
+    name: "12 Душ в групповой установке со смесителем"
+    q0_tot: 0.2
+    q0_c: 0.14
+    q0_h: 0.14
+    q0_hr_tot: 500
+    q0_hr_c: 270
+    q0_hr_h: 230
+    q0_s: 0.2
+    d_podvodki: 10
+    d_otvoda: 50
+  bide:
+    name: "13 Гигиенический душ (биде) со смесителем и аэратором"
+    q0_tot: 0.08
+    q0_c: 0.05
+    q0_h: 0.05
+    q0_hr_tot: 75
+    q0_hr_c: 54
+    q0_hr_h: 54
+    q0_s: 0.15
+    d_podvodki: 10
+    d_otvoda: 32
+  dush_voskhodyashchy:
+    name: "14 Нижний восходящий душ"
+    q0_tot: 0.3
+    q0_c: 0.2
+    q0_h: 0.2
+    q0_hr_tot: 650
+    q0_hr_c: 430
+    q0_hr_h: 430
+    q0_s: 0.3
+    d_podvodki: 15
+    d_otvoda: 40
+  kolonka_mylnya:
+    name: "15 Колонка в мыльне с водоразборным краном холодной или горячей воды"
+    q0_tot: 0.4
+    q0_c: 0.4
+    q0_h: null
+    q0_hr_tot: 1000
+    q0_hr_c: 1000
+    q0_hr_h: null
+    q0_s: 0.4
+    d_podvodki: 20
+    d_otvoda: null
+  unitaz_bachok:
+    name: "16 Унитаз со смывным бачком"
+    q0_tot: 0.1
+    q0_c: 0.1
+    q0_h: null
+    q0_hr_tot: 83
+    q0_hr_c: 83
+    q0_hr_h: null
+    q0_s: 1.6
+    d_podvodki: 8
+    d_otvoda: 85
+  unitaz_kran:
+    name: "17 Унитаз со смывным краном"
+    q0_tot: 1.4
+    q0_c: 1.4
+    q0_h: null
+    q0_hr_tot: 81
+    q0_hr_c: 81
+    q0_hr_h: null
+    q0_s: 1.4
+    d_podvodki: null
+    d_otvoda: 85
+  pissuar:
+    name: "18 Писсуар"
+    q0_tot: 0.035
+    q0_c: 0.035
+    q0_h: null
+    q0_hr_tot: 36
+    q0_hr_c: 36
+    q0_hr_h: null
+    q0_s: 0.1
+    d_podvodki: 10
+    d_otvoda: 40
+  pissuar_poluavtomat:
+    name: "19 Писсуар с полуавтоматическим смывным краном"
+    q0_tot: 0.2
+    q0_c: 0.2
+    q0_h: null
+    q0_hr_tot: 36
+    q0_hr_c: 36
+    q0_hr_h: null
+    q0_s: 0.2
+    d_podvodki: 15
+    d_otvoda: 40
+  fontanchik:
+    name: "20 Питьевой фонтанчик"
+    q0_tot: 0.04
+    q0_c: 0.04
+    q0_h: null
+    q0_hr_tot: 72
+    q0_hr_c: 72
+    q0_hr_h: null
+    q0_s: 0.05
+    d_podvodki: 10
+    d_otvoda: 25
+  polivochny_kran:
+    name: "21 Поливочный кран"
+    q0_tot: 0.3
+    q0_c: 0.3
+    q0_h: 0.2
+    q0_hr_tot: 1080
+    q0_hr_c: 1080
+    q0_hr_h: 720
+    q0_s: 0.3
+    d_podvodki: 15
+    d_otvoda: null
+  trap_du50:
+    name: "22 Трап условным диаметром 50 мм"
+    q0_tot: null
+    q0_c: null
+    q0_h: null
+    q0_hr_tot: null
+    q0_hr_c: null
+    q0_hr_h: null
+    q0_s: 0.7
+    d_podvodki: null
+    d_otvoda: 50
+  trap_du100:
+    name: "22 Трап условным диаметром 100 мм"
+    q0_tot: null
+    q0_c: null
+    q0_h: null
+    q0_hr_tot: null
+    q0_hr_c: null
+    q0_hr_h: null
+    q0_s: 1.1
+    d_podvodki: null
+    d_otvoda: 100
+  posudomoechnaya:
+    name: "23 Посудомоечная машина"
+    q0_tot: 0.2
+    q0_c: 0.2
+    q0_h: null
+    q0_hr_tot: 9
+    q0_hr_c: 9
+    q0_hr_h: null
+    q0_s: 0.15
+    d_podvodki: 15
+    d_otvoda: 20
+  stiralnaya:
+    name: "24 Стиральная машина"
+    q0_tot: 0.2
+    q0_c: 0.2
+    q0_h: null
+    q0_hr_tot: 60
+    q0_hr_c: 60
+    q0_hr_h: null
+    q0_s: 1
+    d_podvodki: 15
+    d_otvoda: 20
+note: >
+  Примечание к таблице А.1: для систем холодного и горячего водоснабжения при применении
+  коллекторных подводок из полимерных труб к умывальникам, раковинам, мойкам, смесителям
+  для ванн и умывальников, душевым кабинам, биде, унитазам со смывным бачком, писсуарам,
+  питьевым фонтанчикам диаметр труб следует принимать с учётом п. 8.27 и приложения И.

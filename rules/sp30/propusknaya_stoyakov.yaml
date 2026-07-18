@@ -1,0 +1,54 @@
+# Пропускная способность вентилируемых канализационных стояков
+# Слой 1 базы знаний (см. docs/02-arhitektura.md §4)
+rule: sewer_stack_capacity_vented
+source: "СП 30.13330.2020, приложение К, таблицы К.1–К.4"
+verified: "сверено с PDF ФАУ ФЦС (стр. документа 122–123), 2026-07-18"
+units:
+  otvod_mm: "наружный диаметр поэтажных отводов, мм (для SML — DN)"
+  ugol_grad: "угол присоединения поэтажных отводов к стояку, градус"
+  qs: "пропускная способность стояка, л/с, по диаметру труб стояка, мм; null = «–»"
+primechaniye: >
+  Трубы по К.1–К.4: ПВХ 110×3,2; ПП 110×2,7; чугунные раструбные и SML 110×3,5;
+  ПВХ 50×1,8; ПП 50×1,8; SML 50×3,5. Применение: п. 19.2 — при расходе выше
+  табличного увеличить диаметр стояка или рассредоточить расход по стоякам.
+  Невентилируемые стояки (таблицы К.5–К.8) пока не оцифрованы — см. norms/sp30-13330-2020.md.
+tablitsa_k1_pvh:
+  - {otvod_mm: 50, ugol_grad: 45, qs: {50: 1.10, 110: 8.22}}
+  - {otvod_mm: 50, ugol_grad: 60, qs: {50: 1.03, 110: 7.24}}
+  - {otvod_mm: 50, ugol_grad: 87.5, qs: {50: 0.69, 110: 4.83}}
+  - {otvod_mm: 110, ugol_grad: 45, qs: {50: null, 110: 5.85}}
+  - {otvod_mm: 110, ugol_grad: 60, qs: {50: null, 110: 5.37}}
+  - {otvod_mm: 110, ugol_grad: 87.5, qs: {50: null, 110: 3.58}}
+tablitsa_k2_pp:
+  - {otvod_mm: 40, ugol_grad: 45, qs: {50: 1.23, 110: 8.95}}
+  - {otvod_mm: 40, ugol_grad: 60, qs: {50: 1.14, 110: 8.25}}
+  - {otvod_mm: 40, ugol_grad: 87.5, qs: {50: 0.76, 110: 5.50}}
+  - {otvod_mm: 50, ugol_grad: 45, qs: {50: 1.10, 110: 8.40}}
+  - {otvod_mm: 50, ugol_grad: 60, qs: {50: 1.03, 110: 7.80}}
+  - {otvod_mm: 50, ugol_grad: 87.5, qs: {50: 0.69, 110: 5.20}}
+  - {otvod_mm: 110, ugol_grad: 45, qs: {50: null, 110: 5.90}}
+  - {otvod_mm: 110, ugol_grad: 60, qs: {50: null, 110: 5.40}}
+  - {otvod_mm: 110, ugol_grad: 87.5, qs: {50: null, 110: 3.60}}
+tablitsa_k3_chugun:
+  - {otvod_mm: 50, ugol_grad: 45, qs: {50: 0.96, 100: 6.26, 150: 19.9}}
+  - {otvod_mm: 50, ugol_grad: 60, qs: {50: 0.84, 100: 5.50, 150: 17.6}}
+  - {otvod_mm: 50, ugol_grad: 87.5, qs: {50: 0.56, 100: 3.67, 150: 11.7}}
+  - {otvod_mm: 100, ugol_grad: 45, qs: {50: null, 100: 5.50, 150: 14.5}}
+  - {otvod_mm: 100, ugol_grad: 60, qs: {50: null, 100: 4.90, 150: 12.8}}
+  - {otvod_mm: 100, ugol_grad: 87.5, qs: {50: null, 100: 3.20, 150: 8.62}}
+  - {otvod_mm: 150, ugol_grad: 45, qs: {50: null, 100: null, 150: 12.6}}
+  - {otvod_mm: 150, ugol_grad: 60, qs: {50: null, 100: null, 150: 11.0}}
+  - {otvod_mm: 150, ugol_grad: 87.5, qs: {50: null, 100: null, 150: 7.20}}
+tablitsa_k4_sml:
+  - {otvod_mm: 50, ugol_grad: 45, qs: {50: 1.42, 100: 7.79, 125: 12.94, 150: 20.01}}
+  - {otvod_mm: 50, ugol_grad: 60, qs: {50: 1.25, 100: 6.85, 125: 11.37, 150: 17.58}}
+  - {otvod_mm: 50, ugol_grad: 87.5, qs: {50: 0.87, 100: 4.76, 125: 7.91, 150: 12.23}}
+  - {otvod_mm: 100, ugol_grad: 45, qs: {50: null, 100: 5.79, 125: 9.61, 150: 14.86}}
+  - {otvod_mm: 100, ugol_grad: 60, qs: {50: null, 100: 5.08, 125: 8.45, 150: 13.50}}
+  - {otvod_mm: 100, ugol_grad: 87.5, qs: {50: null, 100: 3.54, 125: 5.88, 150: 9.08}}
+  - {otvod_mm: 125, ugol_grad: 45, qs: {50: null, 100: null, 125: 8.80, 150: 13.01}}
+  - {otvod_mm: 125, ugol_grad: 60, qs: {50: null, 100: null, 125: 7.73, 150: 11.43}}
+  - {otvod_mm: 125, ugol_grad: 87.5, qs: {50: null, 100: null, 125: 5.38, 150: 7.95}}
+  - {otvod_mm: 150, ugol_grad: 45, qs: {50: null, 100: null, 125: null, 150: 12.60}}
+  - {otvod_mm: 150, ugol_grad: 60, qs: {50: null, 100: null, 125: null, 150: 11.07}}
+  - {otvod_mm: 150, ugol_grad: 87.5, qs: {50: null, 100: null, 125: null, 150: 7.70}}
