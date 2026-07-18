@@ -1,0 +1,12 @@
+# Личное для Claude Code (не коммитится, см. docs/ru/memory и docs/ru/settings)
+CLAUDE.local.md
+.claude/settings.local.json
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# ОС и редакторы
+.DS_Store
+Thumbs.db
