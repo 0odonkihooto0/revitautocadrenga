@@ -79,6 +79,18 @@ class TestRouterDvaLucha:
         assert wc["dia_mm"] == 40  # подводка смывного крана из словаря
         assert wc["end"][2] == FLOOR + 800
 
+    def test_odin_luch_kogda_pribory_s_odnoy_storony(self):
+        # стояк с краю (как в эксперименте 02): перекрывающихся лучей быть не должно
+        cluster = {
+            "stoyak_k1": {"x": 100.0, "y": 9000.0, "z_kollektora": FLOOR - 400},
+            "tochka_podkl_voda": {"x": 100.0, "y": 9000.0, "z_mag": FLOOR + 2700},
+            "pribory": CLUSTER["pribory"],
+        }
+        segs = router.route_k1(cluster, axis="y")
+        collectors = [s for s in segs if s["naznachenie"].startswith("сборный")]
+        assert len(collectors) == 1
+        assert collectors[0]["end"][1] == 3000.0  # луч до дальнего прибора
+
     def test_stoyak_vertikalen(self):
         (seg,) = router.route_k1_stack(CLUSTER, stack_dn=110, z_verh=FLOOR + 2700)
         assert seg["start"][:2] == seg["end"][:2] == (100.0, 5000.0)

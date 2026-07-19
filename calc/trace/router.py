@@ -61,6 +61,20 @@ def _swap_segments(segments: list[dict]) -> list[dict]:
     return segments
 
 
+def _luchi(xs: list[float], x0: float) -> list[float]:
+    """Концы лучей коллектора/магистрали от точки x0: только в стороны, где есть приборы.
+
+    Приборы по обе стороны — два луча (к min и max); все с одной стороны — один луч
+    к дальнему; прибор на оси (|x - x0| < 1) луча не требует.
+    """
+    ends = []
+    if min(xs) < x0 - 1:
+        ends.append(min(xs))
+    if max(xs) > x0 + 1:
+        ends.append(max(xs))
+    return ends
+
+
 def route_k1(
     passport: dict,
     slope: float = 0.02,
@@ -91,9 +105,7 @@ def route_k1(
     collector_dn = max(
         _sewer_dn(a1[f["tip_a1"]]["d_otvoda"]) for f in fixtures
     )
-    for x_end in (min(xs), max(xs)):
-        if abs(x_end - sx) < 1:
-            continue  # все приборы этой стороны на оси стояка
+    for x_end in _luchi(xs, sx):
         segments.append(_seg(
             "K1", (sx, sy, z_collector_stack), (x_end, sy, z_col(x_end)),
             collector_dn, "сборный отводной трубопровод к стояку"
@@ -150,9 +162,7 @@ def route_water(
     segments = []
     fixtures = [f for f in passport["pribory"] if system in f["connectors"]]
     xs = [float(f["connectors"][system]["x"]) for f in fixtures]
-    for x_end in (min(xs), max(xs)):
-        if abs(x_end - px) < 1:
-            continue
+    for x_end in _luchi(xs, px):
         segments.append(_seg(
             sysname, (px, py, z_main), (x_end, py, z_main), main_dn,
             "магистраль под потолком от точки подключения"
