@@ -8,6 +8,9 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+# Windows-консоль cp1251 падает на «≤» в отчёте — форсируем UTF-8
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 
 from calc.normcheck import checklist
 from calc.sp30.rules_loader import load_rule

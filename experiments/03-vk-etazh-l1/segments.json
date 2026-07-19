@@ -45,8 +45,8 @@
    },
    "podvodki": {
     "c": {
-     "unitaz_kran": 40,
-     "umyvalnik_smesitel": 15
+     "umyvalnik_smesitel": 15,
+     "unitaz_kran": 40
     },
     "h": {
      "umyvalnik_smesitel": 15
@@ -99,8 +99,8 @@
    },
    "podvodki": {
     "c": {
-     "unitaz_kran": 40,
-     "umyvalnik_smesitel": 15
+     "umyvalnik_smesitel": 15,
+     "unitaz_kran": 40
     },
     "h": {
      "umyvalnik_smesitel": 15
@@ -153,8 +153,8 @@
    },
    "podvodki": {
     "c": {
-     "unitaz_kran": 40,
-     "umyvalnik_smesitel": 15
+     "umyvalnik_smesitel": 15,
+     "unitaz_kran": 40
     },
     "h": {
      "umyvalnik_smesitel": 15
@@ -207,8 +207,8 @@
    },
    "podvodki": {
     "c": {
-     "unitaz_kran": 40,
-     "umyvalnik_smesitel": 15
+     "umyvalnik_smesitel": 15,
+     "unitaz_kran": 40
     },
     "h": {
      "umyvalnik_smesitel": 15
@@ -261,8 +261,8 @@
    },
    "podvodki": {
     "c": {
-     "unitaz_kran": 40,
-     "umyvalnik_smesitel": 15
+     "umyvalnik_smesitel": 15,
+     "unitaz_kran": 40
     },
     "h": {
      "umyvalnik_smesitel": 15
@@ -315,13 +315,13 @@
    },
    "podvodki": {
     "c": {
+     "umyvalnik_smesitel": 15,
      "moyka_obshchepit": 15,
-     "rakovina_kran": 15,
-     "umyvalnik_smesitel": 15
+     "rakovina_kran": 15
     },
     "h": {
-     "moyka_obshchepit": 15,
-     "umyvalnik_smesitel": 15
+     "umyvalnik_smesitel": 15,
+     "moyka_obshchepit": 15
     }
    },
    "segmentov": 33
